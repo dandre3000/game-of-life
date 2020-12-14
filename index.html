@@ -3,13 +3,21 @@
 <head>
 	<title>Game of Life</title>
 	<meta charset='utf-8'>
+	<link rel="stylesheet" href="style.css">
 	<script src='./Cell.js'></script>
+	<script src='./matrix.js'></script>
 	<script src='./update.js'></script>
 	<script src='./timeStep.js'></script>
 	<script src='./main.js'></script>
 </head>
 <body>
+	<div id='controls'>
+		<div class="dropdown">
+			<button id='rules' class="dropbtn">Dropdown</button>
+			<ul class="dropdown-content"></ul>
+		</div>
+		<button id='play'>Play</button>
+	</div>
 	<canvas></canvas>
-	<button>Play</button>
 </body>
 </html>

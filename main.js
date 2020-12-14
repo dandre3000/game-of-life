@@ -1,43 +1,6 @@
 var canv
 var ctx
 
-const matrix = []
-matrix.x = 16
-matrix.y = 16
-
-const updateMatrix = []
-
-for (let i = 0; i < 36; i++) {
-	matrix.push([])
-	updateMatrix.push([])
-	for (let j = 0; j < 48; j++) {
-		matrix[i].push(new Cell(i, j))
-		updateMatrix[i].push(new Cell(i, j))
-	}
-}
-
-matrix.update = () => {
-	for (let i in matrix) {
-		for (let j in matrix[i]) {
-			matrix[i][j].update()
-		}
-	}
-	
-	for (let i in matrix) {
-		for (let j in matrix[i]) {
-			matrix[i][j].value = updateMatrix[i][j].value
-		}
-	}
-}
-
-matrix.draw = () => {
-	for (let i in matrix) {
-		for (let j in matrix[i]) {
-			matrix[i][j].draw()
-		}
-	}
-}
-
 const render = () => {
 	ctx.fillStyle = 'black'
 	ctx.fillRect(0, 0, canv.width, canv.height)
@@ -69,7 +32,7 @@ window.addEventListener('DOMContentLoaded', e => {
 		}
 	})
 	
-	const playBtn = document.querySelector('button')
+	const playBtn = document.getElementById('play')
 	playBtn.addEventListener('click', e => {
 		if (running) {
 			stop()
@@ -78,6 +41,18 @@ window.addEventListener('DOMContentLoaded', e => {
 			start()
 			playBtn.innerText = 'Pause'
 		}
+	})
+	
+	const dropdown = document.querySelector('#rules ~ .dropdown-content')
+	Object.getOwnPropertyNames(rules).forEach(n => {
+		const item = document.createElement('li')
+		item.innerText = n
+		
+		item.addEventListener('click', e => {
+			name = n
+		})
+		
+		dropdown.appendChild(item)
 	})
 	
 	render()
