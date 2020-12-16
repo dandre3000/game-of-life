@@ -66,9 +66,48 @@ window.addEventListener('DOMContentLoaded', e => {
 		
 		item.addEventListener('click', e => {
 			name = n
+			rule = { ...rules[name] }
+			BInput.value = rule.B
+			SInput.value = rule.S
+			GInput.value = rule.G
 		})
 		
 		dropdown.appendChild(item)
+	})
+	
+	const BInput = document.getElementById('B-input')
+	BInput.addEventListener('input', e => {
+		const B = []
+		const input = BInput.value.replace(/,*/g,'')
+		
+		for (let i in input) {
+			const n = Number(input[i])
+			
+			if (isNaN(n)) return false
+			B.push(n)
+		}
+		
+		rule.B = B
+	})
+	
+	const SInput = document.getElementById('S-input')
+	SInput.addEventListener('input', e => {
+		const S = []
+		const input = SInput.value.replace(/,*/g,'')
+		
+		for (let i in input) {
+			const n = Number(input[i])
+			
+			if (isNaN(n)) return false
+			S.push(n)
+		}
+		
+		rule.S = S
+	})
+	
+	const GInput = document.getElementById('G-input')
+	GInput.addEventListener('input', e => {
+		rule.G = GInput.value
 	})
 	
 	start()

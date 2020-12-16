@@ -27,14 +27,14 @@ class Cell {
 		}
 		
 		if (this.value > 0) {
-			if (!survive(rules[name], sum)) {
+			if (!survive(rule, sum)) {
 				updateMatrix[this.row][this.col].value = this.value + 1
 			}
 		} else {
-			updateMatrix[this.row][this.col].value = born(rules[name], sum)
+			updateMatrix[this.row][this.col].value = born(rule, sum)
 		}
 		
-		if (updateMatrix[this.row][this.col].value >= rules[name].G) updateMatrix[this.row][this.col].value = 0
+		if (updateMatrix[this.row][this.col].value >= rule.G) updateMatrix[this.row][this.col].value = 0
 	}
 	draw(ctx) {
 		ctx.fillStyle = this.value? colors[this.value - 1] : 'white'

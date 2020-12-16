@@ -28,6 +28,8 @@ const rules = {
 	}
 }
 
+var rule = { ...rules.Life }
+
 const born = ({ B }, n) => {
 	for(let i in B) {
 		if (n == B[i]) return true

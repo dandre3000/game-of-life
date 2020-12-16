@@ -13,16 +13,21 @@
 </head>
 <body>
 	<div id='controls'>
-		<div class="dropdown">
-			<button id='rules' class="dropbtn">Dropdown</button>
-			<ul class="dropdown-content"></ul>
-		</div>
-		<button id='play'>Play</button>
-		<button id='clear'>Clear</button>
-		<button id='random'>Random</button>
 		<div>
-			<input id='born-input' type='text'>
-			<input id='survive-input' type='text'>
+			<div class="dropdown">
+				<button id='rules' class="dropbtn">Dropdown</button>
+				<ul class="dropdown-content"></ul>
+			</div>
+			<button id='play'>Play</button>
+			<button id='clear'>Clear</button>
+			<button id='random'>Random</button>
+		</div>
+		<div>
+			<label for='B-input'>B:</label><input id='B-input' type='text'>
+			<label for='S-input'>S:</label><input id='S-input' type='text'>
+			<label for='G-input'>G:</label><input id='G-input' type='number'>
+		</div>
+		<div>
 		</div>
 	</div>
 	<canvas></canvas>
