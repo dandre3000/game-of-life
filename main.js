@@ -110,5 +110,11 @@ window.addEventListener('DOMContentLoaded', e => {
 		rule.G = GInput.value
 	})
 	
+	const fpsInput = document.getElementById('fps')
+	document.querySelector('#fps+span').innerText = TARGET_FRAME_RATE = fpsInput.value
+	fpsInput.addEventListener('input', e => {
+		document.querySelector('#fps+span').innerText = TARGET_FRAME_RATE = fpsInput.value
+	})
+	
 	start()
 })
