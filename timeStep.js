@@ -1,10 +1,11 @@
-const TARGET_FRAME_RATE = 15
+const TARGET_FRAME_RATE = 30
 const UPDATE_INTERVAL = 1000 / TARGET_FRAME_RATE
 
 let accumulator = 0
 let lastTime = 0
 let req = 0
 let running = false
+let updating = false
 
 // frame rate independent loop
 const timeStep = () => {
@@ -17,7 +18,7 @@ const timeStep = () => {
 
 	// while loop locked at an exact frame rate
 	while (running && accumulator >= UPDATE_INTERVAL) {
-		update(UPDATE_INTERVAL)
+		if (updating) update(UPDATE_INTERVAL)
 		
 		accumulator -= UPDATE_INTERVAL
 	}
