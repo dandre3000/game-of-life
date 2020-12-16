@@ -13,6 +13,24 @@ for (let i = 0; i < 36; i++) {
 	}
 }
 
+matrix.clear = () => {
+	for (let i in matrix) {
+		for (let j in matrix[i]) {
+			matrix[i][j].value = 0
+			updateMatrix[i][j].value = 0
+		}
+	}
+}
+
+matrix.random = () => {
+	for (let i in matrix) {
+		for (let j in matrix[i]) {
+			matrix[i][j].value = Math.round(Math.random())
+			updateMatrix[i][j].value = 0
+		}
+	}
+}
+
 matrix.update = () => {
 	for (let i in matrix) {
 		for (let j in matrix[i]) {
@@ -30,7 +48,9 @@ matrix.update = () => {
 matrix.draw = () => {
 	for (let i in matrix) {
 		for (let j in matrix[i]) {
-			matrix[i][j].draw()
+			matrix[i][j].draw(canv.getContext('2d'))
 		}
 	}
+	
+	//ctx.drawImage(canv.buffer, 0, 0)
 }

@@ -4,6 +4,7 @@
 	<title>Game of Life</title>
 	<meta charset='utf-8'>
 	<link rel="stylesheet" href="style.css">
+	<script src='./automata.js'></script>
 	<script src='./Cell.js'></script>
 	<script src='./matrix.js'></script>
 	<script src='./update.js'></script>
@@ -17,6 +18,12 @@
 			<ul class="dropdown-content"></ul>
 		</div>
 		<button id='play'>Play</button>
+		<button id='clear'>Clear</button>
+		<button id='random'>Random</button>
+		<div>
+			<input id='born-input' type='text'>
+			<input id='survive-input' type='text'>
+		</div>
 	</div>
 	<canvas></canvas>
 </body>
