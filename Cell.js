@@ -1,37 +1,6 @@
 const size = 16
-const gap = 2
-
-var name = 'Life'
-
-const rules = {
-	'Life': {
-		B: [3],
-		S: [2, 3]
-	},
-	'Day & Night': {
-		B: [3, 6, 7, 8],
-		S: [3, 4, 6, 7, 8]
-	},
-	'Seeds': {
-		B: [2],
-		S: []
-	}
-}
-
-const born = ({ B }, n) => {
-	for(let i in B) {
-		if (n == B[i]) return 1
-	}
-	
-	return 0
-}
-const survive = ({ S }, n) => {
-	for(let i in S) {
-		if (n == S[i]) return 1
-	}
-	
-	return 0
-}
+const gap = 1
+const colors = ['purple', 'indigo', 'blue', 'cyan', 'green', 'lightgreen', 'yellow', 'gold', 'orange', 'orangered', 'red']
 
 class Cell {
 	constructor(row, col) {
@@ -53,18 +22,22 @@ class Cell {
 					continue
 				}
 				
-				if (matrix[i < 0? matrix.length - 1 : i > matrix.length - 1? 0 : i][j > matrix[0].length - 1? 0 : j < 0? matrix[0].length - 1 : j].value) sum++
+				if (matrix[i < 0? matrix.length - 1 : i > matrix.length - 1? 0 : i][j > matrix[0].length - 1? 0 : j < 0? matrix[0].length - 1 : j].value == 1) sum++
 			}
 		}
 		
-		if (this.value) {
-			updateMatrix[this.row][this.col].value = survive(rules[name], sum)
+		if (this.value > 0) {
+			if (!survive(rules[name], sum)) {
+				updateMatrix[this.row][this.col].value = this.value + 1
+			}
 		} else {
 			updateMatrix[this.row][this.col].value = born(rules[name], sum)
 		}
+		
+		if (updateMatrix[this.row][this.col].value >= rules[name].G) updateMatrix[this.row][this.col].value = 0
 	}
-	draw() {
-		ctx.fillStyle = this.value? 'red' : 'white'
+	draw(ctx) {
+		ctx.fillStyle = this.value? colors[this.value - 1] : 'white'
 		ctx.fillRect(matrix.x + this.x + gap / 2, matrix.y + this.y + gap / 2, size - gap, size - gap)
 	}
 }
