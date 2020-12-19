@@ -1,17 +1,15 @@
-var canv
-var ctx
+import { matrix } from './matrix.js'
+import { rules } from './automata.js'
+import { start, stop, toggleUpdate } from './timeStep.js'
+import './style.css'
 
-const mouse = { x: 0, y: 0}
+export var TARGET_FRAME_RATE = 30
+export var canv
+export var ctx
+export var rule = { ...rules.Life }
 
-const render = () => {
-	ctx.fillStyle = 'black'
-	ctx.fillRect(0, 0, canv.width, canv.height)
-	
-	matrix.draw(ctx)
-	
-	ctx.fillStyle = 'red'
-	ctx.fillRect(mouse.x, mouse.y, 1, 1)
-}
+export const mouse = { x: 0, y: 0}
+export const size = 16
 
 window.addEventListener('DOMContentLoaded', e => {
 	canv = document.querySelector('canvas')
@@ -29,7 +27,7 @@ window.addEventListener('DOMContentLoaded', e => {
 		for (let i in matrix) {
 			for (let j in matrix[i]) {
 				if (e.offsetX >= matrix.x + matrix[i][j].x && e.offsetX <= matrix.x + matrix[i][j].x + size - 1 && e.offsetY >= matrix.y + matrix[i][j].y && e.offsetY <= matrix.y + matrix[i][j].y + size - 1) {
-					updateMatrix[i][j].toggle()
+					matrix.shadow[i][j].toggle()
 					matrix[i][j].toggle()
 				}
 			}
@@ -38,25 +36,19 @@ window.addEventListener('DOMContentLoaded', e => {
 	
 	const playBtn = document.getElementById('play')
 	playBtn.addEventListener('click', e => {
-		if (updating) {
-			updating = false
-			playBtn.innerText = 'Play'
-		} else {
-			updating = true
-			playBtn.innerText = 'Pause'
-		}
+		playBtn.innerText = toggleUpdate()? 'Play' : 'Pause'
 	})
 	
 	const clearBtn = document.getElementById('clear')
 	clearBtn.addEventListener('click', e => {
 		matrix.clear()
-		render()
+		// render()
 	})
 	
 	const randomBtn = document.getElementById('random')
 	randomBtn.addEventListener('click', e => {
 		matrix.random()
-		render()
+		// render()
 	})
 	
 	const dropdown = document.querySelector('#rules ~ .dropdown-content')
@@ -116,5 +108,6 @@ window.addEventListener('DOMContentLoaded', e => {
 		document.querySelector('#fps+span').innerText = TARGET_FRAME_RATE = fpsInput.value
 	})
 	
+	matrix.init()
 	start()
 })

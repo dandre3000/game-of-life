@@ -1,8 +1,25 @@
-const size = 16
+import { matrix } from './matrix.js'
+import { ctx, size, rule } from './main.js'
+
 const gap = 1
 const colors = ['purple', 'indigo', 'blue', 'cyan', 'green', 'lightgreen', 'yellow', 'gold', 'orange', 'orangered', 'red']
 
-class Cell {
+const born = ({ B }, n) => {
+	for(let i in B) {
+		if (n == B[i]) return true
+	}
+	
+	return false
+}
+const survive = ({ S }, n) => {
+	for(let i in S) {
+		if (n == S[i]) return true
+	}
+	
+	return false
+}
+
+export class Cell {
 	constructor(row, col) {
 		this.row = row
 		this.col = col
@@ -28,13 +45,13 @@ class Cell {
 		
 		if (this.value > 0) {
 			if (!survive(rule, sum)) {
-				updateMatrix[this.row][this.col].value = this.value + 1
+				matrix.shadow[this.row][this.col].value = this.value + 1
 			}
 		} else {
-			updateMatrix[this.row][this.col].value = born(rule, sum)
+			matrix.shadow[this.row][this.col].value = born(rule, sum)
 		}
 		
-		if (updateMatrix[this.row][this.col].value >= rule.G) updateMatrix[this.row][this.col].value = 0
+		if (matrix.shadow[this.row][this.col].value >= rule.G) matrix.shadow[this.row][this.col].value = 0
 	}
 	draw(ctx) {
 		ctx.fillStyle = this.value? colors[this.value - 1] : 'white'

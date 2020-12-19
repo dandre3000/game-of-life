@@ -1,4 +1,7 @@
-var TARGET_FRAME_RATE = 30
+import { update } from './update.js'
+import { render } from './render.js'
+
+import { TARGET_FRAME_RATE } from './main.js'
 
 let accumulator = 0
 let lastTime = 0
@@ -33,7 +36,7 @@ const timeStep = () => {
 	}
 }
 
-const start = () => {
+export const start = () => {
 	if (!running) {
 		lastTime = 0
 		running = true
@@ -43,7 +46,7 @@ const start = () => {
 	}
 }
 
-const stop = () => {
+export const stop = () => {
 	if (req === 0) {
 		console.warn('No-op: timeStep is not running')
 	} else {
@@ -51,4 +54,8 @@ const stop = () => {
 		accumulator = 0
 		running = false
 	}
+}
+
+export const toggleUpdate = () => {
+	return updating = updating? false : true
 }

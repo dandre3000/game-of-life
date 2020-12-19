@@ -1,6 +1,6 @@
 var name = 'Life'
 
-const rules = {
+export const rules = {
 	'Life': {
 		B: [3],
 		S: [2, 3],
@@ -26,21 +26,4 @@ const rules = {
 		S: [3, 4, 5],
 		G: 4
 	}
-}
-
-var rule = { ...rules.Life }
-
-const born = ({ B }, n) => {
-	for(let i in B) {
-		if (n == B[i]) return true
-	}
-	
-	return false
-}
-const survive = ({ S }, n) => {
-	for(let i in S) {
-		if (n == S[i]) return true
-	}
-	
-	return false
 }
