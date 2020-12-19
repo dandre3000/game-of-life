@@ -1,3 +1,4 @@
 # game-of-life
- cellular automota
+ Interactive cellular automata visualizer
+ 
 [Link](https://dandre3000.github.io/game-of-life/dist/)
