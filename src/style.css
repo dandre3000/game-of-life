@@ -2,6 +2,21 @@
 	float: top;
 }
 
+body {
+	background-color: grey;
+}
+
+main {
+	margin: auto;
+	width: 50%;
+}
+
+#controls {
+	width: 800px;
+	border: 1px solid black;
+	background-color: white;
+}
+
 /* Style The Dropdown Button */
 #rules.dropbtn {
 	border: none;

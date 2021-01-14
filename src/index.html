@@ -5,25 +5,27 @@
 	<meta charset='utf-8'>
 </head>
 <body>
-	<div id='controls'>
-		<div>
-			<div class="dropdown">
-				<button id='rules' class="dropbtn">Dropdown</button>
-				<ul class="dropdown-content"></ul>
+	<main>
+		<div id='controls'>
+			<div>
+				<div class="dropdown">
+					<button id='rules' class="dropbtn">Dropdown</button>
+					<ul class="dropdown-content"></ul>
+				</div>
+				<button id='play'>Play</button>
+				<button id='clear'>Clear</button>
+				<button id='random'>Random</button>
 			</div>
-			<button id='play'>Play</button>
-			<button id='clear'>Clear</button>
-			<button id='random'>Random</button>
+			<div>
+				<label for='B-input'>B:</label><input id='B-input' type='text'>
+				<label for='S-input'>S:</label><input id='S-input' type='text'>
+				<label for='G-input'>G:</label><input id='G-input' type='number'>
+			</div>
+			<div>
+				FPS:<input id='fps' type='range' min='1' max='30' value='30'><span></span>
+			</div>
 		</div>
-		<div>
-			<label for='B-input'>B:</label><input id='B-input' type='text'>
-			<label for='S-input'>S:</label><input id='S-input' type='text'>
-			<label for='G-input'>G:</label><input id='G-input' type='number'>
-		</div>
-		<div>
-			FPS:<input id='fps' type='range' min='1' max='30'><span></span>
-		</div>
-	</div>
-	<canvas></canvas>
+		<canvas></canvas>
+	</main>
 </body>
 </html>
