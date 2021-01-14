@@ -20,12 +20,12 @@ const survive = ({ S }, n) => {
 }
 
 export class Cell {
-	constructor(row, col) {
+	constructor(row, col, value = 0) {
 		this.row = row
 		this.col = col
 		this.x = col * size
 		this.y = row * size
-		this.value = 0
+		this.value = value
 	}
 	toggle() {
 		return this.value == 0? this.value = 1 : this.value = 0
@@ -39,7 +39,7 @@ export class Cell {
 					continue
 				}
 				
-				if (matrix[i < 0? matrix.length - 1 : i > matrix.length - 1? 0 : i][j > matrix[0].length - 1? 0 : j < 0? matrix[0].length - 1 : j].value == 1) sum++
+				if (matrix.data[i < 0? matrix.data.length - 1 : i > matrix.data.length - 1? 0 : i][j > matrix.data[0].length - 1? 0 : j < 0? matrix.data[0].length - 1 : j].value == 1) sum++
 			}
 		}
 		

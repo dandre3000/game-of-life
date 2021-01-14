@@ -24,11 +24,11 @@ window.addEventListener('DOMContentLoaded', e => {
 	})
 	
 	canv.addEventListener('mousedown', e => {
-		for (let i in matrix) {
-			for (let j in matrix[i]) {
-				if (e.offsetX >= matrix.x + matrix[i][j].x && e.offsetX <= matrix.x + matrix[i][j].x + size - 1 && e.offsetY >= matrix.y + matrix[i][j].y && e.offsetY <= matrix.y + matrix[i][j].y + size - 1) {
+		for (let i in matrix.data) {
+			for (let j in matrix.data[i]) {
+				if (e.offsetX >= matrix.x + matrix.data[i][j].x && e.offsetX <= matrix.x + matrix.data[i][j].x + size - 1 && e.offsetY >= matrix.y + matrix.data[i][j].y && e.offsetY <= matrix.y + matrix.data[i][j].y + size - 1) {
 					matrix.shadow[i][j].toggle()
-					matrix[i][j].toggle()
+					matrix.data[i][j].toggle()
 				}
 			}
 		}
@@ -103,10 +103,12 @@ window.addEventListener('DOMContentLoaded', e => {
 	})
 	
 	const fpsInput = document.getElementById('fps')
-	document.querySelector('#fps+span').innerText = TARGET_FRAME_RATE = fpsInput.value
+	
 	fpsInput.addEventListener('input', e => {
 		document.querySelector('#fps+span').innerText = TARGET_FRAME_RATE = fpsInput.value
 	})
+	
+	document.querySelector('#fps+span').innerText = TARGET_FRAME_RATE = fpsInput.value
 	
 	matrix.init()
 	start()
