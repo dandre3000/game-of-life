@@ -27,7 +27,6 @@ window.addEventListener('DOMContentLoaded', e => {
 		for (let i in matrix.data) {
 			for (let j in matrix.data[i]) {
 				if (e.offsetX >= matrix.x + matrix.data[i][j].x && e.offsetX <= matrix.x + matrix.data[i][j].x + size - 1 && e.offsetY >= matrix.y + matrix.data[i][j].y && e.offsetY <= matrix.y + matrix.data[i][j].y + size - 1) {
-					matrix.shadow[i][j].toggle()
 					matrix.data[i][j].toggle()
 				}
 			}
