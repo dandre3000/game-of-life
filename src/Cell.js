@@ -50,10 +50,18 @@ export class Cell {
 			}
 		}
 		
-		if (this.value > 0) {
+		// live
+		if (this.value == 1) {
+			this.next = this.value // no change
+			
+			// grow older
 			if (!survive(rule, sum)) {
 				this.next++
 			}
+		// dying
+		} else if(this.value > 1) {
+			this.next++
+		// dead
 		} else {
 			this.next = born(rule, sum)
 		}
