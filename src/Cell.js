@@ -30,8 +30,9 @@ export class Cell {
 		this.next = 0 // value that's assigned after all cells have been updated
 	}
 	
-	toggle() {
-		return this.value == 0? this.value = 1 : this.value = 0
+	onClick() {
+		this.value < rule.G - 1? this.value++ : this.value = 0
+		this.next = this.value
 	}
 	
 	update() {
