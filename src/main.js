@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', e => {
 	
 	const playBtn = document.getElementById('play')
 	playBtn.addEventListener('click', e => {
-		playBtn.innerText = toggleUpdate()? 'Play' : 'Pause'
+		playBtn.innerText = toggleUpdate()? 'Pause' : 'Play'
 	})
 	
 	const clearBtn = document.getElementById('clear')
