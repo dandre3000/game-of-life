@@ -15,7 +15,7 @@ window.addEventListener('DOMContentLoaded', e => {
 	canv = document.querySelector('canvas')
 	// canv.buffer = document.createElement('canvas')
 	/*canv.buffer.width = */canv.width = 800
-	/*canv.buffer.width = */canv.height = 600
+	/*canv.buffer.width = */canv.height = canv.width * 3 / 4
 	ctx = canv.getContext('2d')
 	
 	canv.addEventListener('mousemove', e => {
