@@ -7,14 +7,20 @@ body {
 }
 
 main {
-	margin: auto;
 	width: 50%;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 #controls {
-	width: 800px;
 	border: 1px solid black;
 	background-color: white;
+}
+
+canvas {
+	
 }
 
 /* Style The Dropdown Button */
