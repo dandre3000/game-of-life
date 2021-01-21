@@ -30,9 +30,18 @@ export class Cell {
 		this.next = 0 // value that's assigned after all cells have been updated
 	}
 	
-	onClick() {
-		this.value < rule.G - 1? this.value++ : this.value = 0
-		this.next = this.value
+	intersectPoint(x, y) {
+		return x >= this.x + matrix.x && x <= this.x + matrix.x + size - 1 && y >= this.y + matrix.y && y <= this.y + matrix.y + size - 1
+	}
+	
+	onClick(e) {
+		if (e.buttons == 1 && this.value < rule.G - 1) {
+			 this.value = 1
+		} else if (e.buttons == 2 && this.value > 0) {
+			this.value = 0
+		}
+		
+		// this.next = this.value
 	}
 	
 	update() {

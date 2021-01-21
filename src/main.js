@@ -11,26 +11,28 @@ export var rule = { ...rules.Life }
 export const mouse = { x: 0, y: 0}
 export const size = 16
 
-window.addEventListener('DOMContentLoaded', e => {
-	canv = document.querySelector('canvas')
-	// canv.buffer = document.createElement('canvas')
-	/*canv.buffer.width = */canv.width = 800
-	/*canv.buffer.width = */canv.height = canv.width * 3 / 4
+window.addEventListener('DOMContentLoaded', () => {
+	window.canv = canv = document.querySelector('canvas')
+	canv.width = canv.offsetWidth
+	canv.height = canv.width * 3 / 4
+	
 	ctx = canv.getContext('2d')
 	
 	canv.addEventListener('mousemove', e => {
 		mouse.x = e.offsetX
 		mouse.y = e.offsetY
+		
+		matrix.onClick(e)
 	})
 	
 	canv.addEventListener('mousedown', e => {
-		for (let i in matrix.data) {
-			for (let j in matrix.data[i]) {
-				if (e.offsetX >= matrix.x + matrix.data[i][j].x && e.offsetX <= matrix.x + matrix.data[i][j].x + size - 1 && e.offsetY >= matrix.y + matrix.data[i][j].y && e.offsetY <= matrix.y + matrix.data[i][j].y + size - 1) {
-					matrix.data[i][j].onClick()
-				}
-			}
-		}
+		matrix.onClick(e)
+	})
+	
+	canv.addEventListener('contextmenu', e => {
+		e.preventDefault()
+		
+		return false
 	})
 	
 	const playBtn = document.getElementById('play')
