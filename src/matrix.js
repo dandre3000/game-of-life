@@ -1,5 +1,5 @@
 import { Cell } from './Cell.js'
-import { canv } from './main.js'
+import { canv, size } from './main.js'
 
 export const matrix = window.matrix = {
 	data: [],
@@ -10,7 +10,7 @@ export const matrix = window.matrix = {
 	
 	init: () => {
 		const min = Math.min(canv.width, canv.height)
-		const rows = Math.floor(min / 16)
+		const rows = Math.floor(min / size)
 		
 		for (let i = 0; i < rows; i++) {
 			matrix.data.push([])
@@ -19,8 +19,8 @@ export const matrix = window.matrix = {
 			}
 		}
 		
-		matrix.w = rows * 16
-		matrix.h = rows * 16
+		matrix.w = rows * size
+		matrix.h = rows * size
 		matrix.x = (canv.width - matrix.w) / 2
 		matrix.y = (canv.height - matrix.h) / 2
 	},
