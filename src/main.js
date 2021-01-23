@@ -53,16 +53,18 @@ window.addEventListener('DOMContentLoaded', () => {
 	})
 	
 	const dropdown = document.querySelector('#rules ~ .dropdown-content')
-	Object.getOwnPropertyNames(rules).forEach(n => {
+	const ruleDisplay = document.getElementById('rule')
+	Object.getOwnPropertyNames(rules).forEach(name => {
 		const item = document.createElement('li')
-		item.innerText = n
+		item.innerText = name
 		
 		item.addEventListener('click', e => {
-			name = n
 			rule = { ...rules[name] }
 			BInput.value = rule.B
 			SInput.value = rule.S
 			GInput.value = rule.G
+			
+			ruleDisplay.innerText = name
 		})
 		
 		dropdown.appendChild(item)
@@ -111,6 +113,7 @@ window.addEventListener('DOMContentLoaded', () => {
 	
 	document.querySelector('#fps+span').innerText = TARGET_FRAME_RATE = fpsInput.value
 	
+	ruleDisplay.innerText = 'Life'
 	matrix.init()
 	start()
 })
