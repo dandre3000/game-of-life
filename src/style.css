@@ -65,3 +65,17 @@ main {
 .dropdown:hover .dropbtn {
 	background-color: #3e8e41;
 }
+
+/* medium */
+@media (max-width: 1200px) {
+	main {
+		width: 75%;
+	}
+}
+
+/* small */
+@media (max-width: 800px) {
+	main {
+		width: 100%;
+	}
+}
