@@ -41,7 +41,7 @@ export class Cell {
 			this.value = 0
 		}
 		
-		// this.next = this.value
+		this.next = this.value
 	}
 	
 	update() {
@@ -56,13 +56,14 @@ export class Cell {
 				}
 				// wrap toroidally if cell is out of bounds
 				// increment sum if value == 1
-				if (matrix.data[i < 0? matrix.data.length - 1 : i > matrix.data.length - 1? 0 : i][j > matrix.data[0].length - 1? 0 : j < 0? matrix.data[0].length - 1 : j].value == 1) sum++
+				// if (this.row == 0 && this.col == 0) console.log((matrix.data.length + i) % matrix.data.length, (matrix.data[0].length + j) % matrix.data[0].length)
+				if (matrix.data[(matrix.data.length + i) % matrix.data.length][(matrix.data[0].length + j) % matrix.data[0].length].value == 1) sum++
 			}
 		}
 		
 		// live
 		if (this.value == 1) {
-			this.next = this.value // no change
+			// this.next = this.value // no change
 			
 			// grow older
 			if (!survive(rule, sum)) {
