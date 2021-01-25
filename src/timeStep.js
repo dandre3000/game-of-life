@@ -19,6 +19,8 @@ const timeStep = () => {
 	lastTime = time
 	
 	accumulator += frameTime
+	
+	if (accumulator > 1000) accumulator = 1000
 
 	// while loop locked at an exact frame rate
 	while (running && accumulator >= UPDATE_INTERVAL) {
