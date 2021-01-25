@@ -13,8 +13,6 @@ export const size = 16
 
 window.addEventListener('DOMContentLoaded', () => {
 	window.canv = canv = document.querySelector('canvas')
-	canv.width = canv.offsetWidth
-	canv.height = canv.width * 3 / 4
 	
 	ctx = canv.getContext('2d')
 	
@@ -54,6 +52,8 @@ window.addEventListener('DOMContentLoaded', () => {
 	
 	const dropdown = document.querySelector('#rules ~ .dropdown-content')
 	const ruleDisplay = document.getElementById('rule')
+	ruleDisplay.innerText = 'Life'
+	
 	Object.getOwnPropertyNames(rules).forEach(name => {
 		const item = document.createElement('li')
 		item.innerText = name
@@ -112,8 +112,12 @@ window.addEventListener('DOMContentLoaded', () => {
 	})
 	
 	document.querySelector('#fps+span').innerText = TARGET_FRAME_RATE = fpsInput.value
+})
+
+window.onload = () => {
+	canv.width = canv.offsetWidth
+	canv.height = canv.width * 3 / 4
 	
-	ruleDisplay.innerText = 'Life'
 	matrix.init()
 	start()
-})
+}
