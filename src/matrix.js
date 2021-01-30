@@ -3,26 +3,31 @@ import { canv, size } from './main.js'
 
 export const matrix = window.matrix = {
 	data: [],
+	updates: [],
 	x: 0,
 	y: 0,
 	w: 0,
 	h: 0,
+	buffer: document.createElement('canvas'),
 	
 	init: () => {
 		const min = Math.min(canv.width, canv.height)
-		const rows = Math.floor(min / size)
+		const rows = 32 // Math.floor(min / size)
+		
+		matrix.buffer.width = rows * size
+		matrix.buffer.height = rows * size
+		matrix.x = (canv.width - matrix.buffer.width) / 2
+		matrix.y = (canv.height - matrix.buffer.height) / 2
 		
 		for (let i = 0; i < rows; i++) {
 			matrix.data.push([])
 			for (let j = 0; j < rows; j++) {
-				matrix.data[i].push(new Cell(i, j))
+				const cell = new Cell(i, j)
+				
+				matrix.data[i].push(cell)
+				cell.draw(matrix.buffer.getContext('2d'))
 			}
 		}
-		
-		matrix.w = rows * size
-		matrix.h = rows * size
-		matrix.x = (canv.width - matrix.w) / 2
-		matrix.y = (canv.height - matrix.h) / 2
 	},
 
 	clear: () => {
@@ -30,15 +35,25 @@ export const matrix = window.matrix = {
 			row.forEach((cell, j) => {
 				cell.value = 0
 				cell.next = 0
+				
+				matrix.updates.push(cell)
 			})
 		})
 	},
 
 	random: () => {
+		matrix.updates = []
+		
 		matrix.data.forEach((row, i) => {
 			row.forEach((cell, j) => {
-				cell.value = Math.round(Math.random())
-				cell.next = 0
+				let v = Math.round(Math.random())
+				
+				if (cell.value != v) {
+					cell.value = v
+					cell.next = v
+					
+					matrix.updates.push(cell)
+				}
 			})
 		})
 	},
@@ -67,20 +82,18 @@ export const matrix = window.matrix = {
 			})
 		})
 		
-		matrix.data.forEach((row, i) => {
-			row.forEach((cell, j) => {
-				cell.value = cell.next
-			})
+		matrix.updates.forEach(cell => {
+			cell.value = cell.next
 		})
 	},
 
 	draw: () => {
-		matrix.data.forEach((row, i) => {
-			row.forEach((cell, j) => {
-				cell.draw(canv.getContext('2d'))
-			})
+		canv.getContext('2d').drawImage(matrix.buffer, matrix.x, matrix.y)
+		
+		matrix.updates.forEach(cell => {
+			cell.draw(matrix.buffer.getContext('2d'))
 		})
 		
-		//ctx.drawImage(canv.buffer, 0, 0)
+		matrix.updates = []
 	}
 }

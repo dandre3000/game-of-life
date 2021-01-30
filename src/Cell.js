@@ -2,14 +2,14 @@ import { matrix } from './matrix.js'
 import { ctx, size, rule } from './main.js'
 
 const gap = 1
-const colors = ['purple', 'indigo', 'blue', 'cyan', 'green', 'lightgreen', 'yellow', 'gold', 'orange', 'orangered', 'red']
+const colors = ['white', 'purple', 'indigo', 'blue', 'cyan', 'green', 'lightgreen', 'yellow', 'gold', 'orange', 'orangered', 'red']
 
 const born = ({ B }, n) => {
 	for(let i in B) {
-		if (n == B[i]) return true
+		if (n == B[i]) return 1
 	}
 	
-	return false
+	return 0
 }
 
 const survive = ({ S }, n) => {
@@ -36,15 +36,18 @@ export class Cell {
 	
 	onClick(e) {
 		if (e.buttons == 1 && this.value < rule.G - 1) {
-			 this.value = 1
+			 this.value = this.next = 1
+			 
+			 matrix.updates.push(this)
 		} else if (e.buttons == 2 && this.value > 0) {
-			this.value = 0
+			this.value = this.next = 0
+			
+			matrix.updates.push(this)
 		}
-		
-		this.next = this.value
 	}
 	
 	update() {
+		const tmp = this.next
 		let sum = 0
 		
 		// loop through surrounding 8 cells
@@ -56,7 +59,6 @@ export class Cell {
 				}
 				// wrap toroidally if cell is out of bounds
 				// increment sum if value == 1
-				// if (this.row == 0 && this.col == 0) console.log((matrix.data.length + i) % matrix.data.length, (matrix.data[0].length + j) % matrix.data[0].length)
 				if (matrix.data[(matrix.data.length + i) % matrix.data.length][(matrix.data[0].length + j) % matrix.data[0].length].value == 1) sum++
 			}
 		}
@@ -78,10 +80,13 @@ export class Cell {
 		}
 		// too old
 		if (this.next >= rule.G) this.next = 0
+		
+		if (tmp != this.next) matrix.updates.push(this)
 	}
 	
 	draw(ctx) {
-		ctx.fillStyle = this.value? colors[this.value - 1] : 'white'
-		ctx.fillRect(matrix.x + this.x + gap / 2, matrix.y + this.y + gap / 2, size - gap, size - gap)
+		ctx.clearRect(this.x, this.y, size, size)
+		ctx.fillStyle = colors[this.value]
+		ctx.fillRect(this.x + gap / 2, this.y + gap / 2, size - gap, size - gap)
 	}
 }
