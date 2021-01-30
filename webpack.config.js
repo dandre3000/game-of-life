@@ -37,7 +37,10 @@ let config = {
 	],
 	devServer: {
 		contentBase: path.resolve(__dirname, 'dist'),
-		publicPath: `http://localhost:8080/dist/`,
+		publicPath: './',
+		host: '192.168.0.8',
+		// port: 8080,
+		// disableHostCheck: true,
 		hot: true,
 		historyApiFallback: true,
 		writeToDisk: true
