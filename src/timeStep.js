@@ -10,10 +10,9 @@ let running = false
 let updating = false
 
 // frame rate independent loop
-const timeStep = () => {
+const timeStep = (time) => {
 	const UPDATE_INTERVAL = 1000 / TARGET_FRAME_RATE
 	
-	let time = window.performance.now()
 	let frameTime = lastTime == 0? 0 : time - lastTime
 	
 	lastTime = time
@@ -40,7 +39,7 @@ const timeStep = () => {
 
 export const start = () => {
 	if (!running) {
-		lastTime = 0
+		lastTime = window.performance.now()
 		running = true
 		req = requestAnimationFrame(timeStep)
 	} else {
