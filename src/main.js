@@ -52,7 +52,6 @@ window.addEventListener('DOMContentLoaded', () => {
 	
 	const dropdown = document.querySelector('#rules ~ .dropdown-content')
 	const ruleDisplay = document.getElementById('rule')
-	ruleDisplay.innerText = 'Life'
 	
 	Object.getOwnPropertyNames(rules).forEach(name => {
 		const item = document.createElement('li')
@@ -69,6 +68,26 @@ window.addEventListener('DOMContentLoaded', () => {
 		
 		dropdown.appendChild(item)
 	})
+	
+	const rulesBtn = document.getElementById('rules')
+	rulesBtn.addEventListener('click', e => {
+		if (dropdown.style.display != 'block') {
+			dropdown.style.display = 'block'
+			rulesBtn.innerText = 'Automata ^'
+		} else {
+			dropdown.style.display = 'none'
+			rulesBtn.innerText = 'Automata v'
+		}
+	})
+	
+	document.body.addEventListener('click', e => {
+		if (e.target != rulesBtn) {
+			dropdown.style.display = 'none'
+			rulesBtn.innerText = 'Automata v'
+		}
+	})
+	
+	ruleDisplay.innerText = 'Life'
 	
 	const BInput = document.getElementById('B-input')
 	BInput.addEventListener('input', e => {
